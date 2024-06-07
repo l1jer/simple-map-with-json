@@ -1,4 +1,4 @@
-# Google Maps API Integration
+# Simple Map with JSON as a stockist map by using Google Maps API Integration
 
 This repository contains code to implement a custom Google Maps integration. It displays a map with a styled interface and custom markers for specific locations. This is ideal for showcasing business locations, event venues, or any place of interest on your website.
 
