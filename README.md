@@ -46,5 +46,5 @@ Below is a simple example of how the map is integrated and displayed using the p
 
 Replace YOUR_GOOGLE_MAP_API_KEY with your actual API key and path_to_your_custom_script.js with the path to the JavaScript file containing the initMap function and related logic.
 
-##Customization
+## Customization
 You can customize the map style, marker icons, and information window contents by modifying the mapOptions, locations, and contentString variables in the script.
