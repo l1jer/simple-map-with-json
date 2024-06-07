@@ -1,0 +1,93 @@
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAP_API_KEY=initMap"></script>
+<div id="map" style="height: 700px; width: 100%"></div>
+
+<script>
+	function initMap() {
+		const mapOptions = {
+			zoom: 5,
+			center: { lat: -25.344, lng: 131.036 }, // Adjust as needed
+			streetViewControl: false,
+			styles: [
+				{ elementType: "geometry", stylers: [{ color: "#ebe3cd" }] },
+				{ elementType: "labels.text.fill", stylers: [{ color: "#523735" }] },
+				{ elementType: "labels.text.stroke", stylers: [{ color: "#f5f1e6" }] },
+				{
+					featureType: "administrative",
+					elementType: "geometry.stroke",
+					stylers: [{ color: "#c9b2a6" }],
+				},
+				{
+					featureType: "landscape.natural",
+					elementType: "geometry",
+					stylers: [{ color: "#dfd2ae" }],
+				},
+				{
+					featureType: "poi",
+					elementType: "geometry",
+					stylers: [{ color: "#dfd2ae" }],
+				},
+				{
+					featureType: "road",
+					elementType: "geometry",
+					stylers: [{ color: "#f5f1e6" }],
+				},
+				{
+					featureType: "water",
+					elementType: "geometry.fill",
+					stylers: [{ color: "#b9d3c2" }],
+				},
+			],
+		};
+		const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+		const locations = [
+			{
+				"name": "SHOP NAME",
+				"address": "13 street name, suburb state postcode",
+				"lat": -34.059563,
+				"lng": 150.8176356
+			}
+		]
+
+		let currentInfowindow = null; // This will hold the currently open info window
+
+		locations.forEach((location) => {
+			const marker = new google.maps.Marker({
+				position: { lat: location.lat, lng: location.lng },
+				map: map,
+				title: location.name,
+				icon: {
+					url: "https://bushpigshotguns.com.au/wp-content/uploads/bushpig-gun-pin.png",
+					scaledSize: new google.maps.Size(32, 42),
+				},
+			});
+
+			const contentString = `
+    <div style="padding: 0.5rem 0.25rem;display:flex;align-items: center;flex-direction: column;">
+    <img style="margin-bottom: 1rem" src="PIN_IMGAE_URL" width="75%">
+      <h6 style="font-size: 16px; font-weight: bold; margin-bottom: 1rem;">${location.name.toUpperCase()}</h6>
+      <p style="font-size: 14px;">${location.address}</p>
+    </div>
+  `;
+
+			const infowindow = new google.maps.InfoWindow({
+				content: contentString,
+				maxWidth: 350,
+			});
+
+			marker.addListener("click", function () {
+				// Close the previous info window if it exists
+				if (currentInfowindow) {
+					currentInfowindow.close();
+				}
+				// Open the new info window and set it as the current
+				infowindow.open(map, marker);
+				currentInfowindow = infowindow;
+			});
+		});
+	}
+
+	document.addEventListener("DOMContentLoaded", function () {
+		initMap();
+	});
+</script>
